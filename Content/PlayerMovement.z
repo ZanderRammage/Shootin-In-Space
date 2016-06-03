@@ -1,0 +1,69 @@
+class PlayerMovement : ZilchComponent
+{
+    var Direction : Real3 = Real3(0,0,0);
+    var Up : Boolean;
+    var Down : Boolean;
+    var Left : Boolean;
+    var Right : Boolean;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Direction = this.Owner.RigidBody.Velocity;
+        this.Up = Zero.Keyboard.KeyIsDown(Keys.W) || Zero.Keyboard.KeyIsDown(Keys.Up);
+        this.Down = Zero.Keyboard.KeyIsDown(Keys.S) || Zero.Keyboard.KeyIsDown(Keys.Down);
+        this.Right = Zero.Keyboard.KeyIsDown(Keys.D) || Zero.Keyboard.KeyIsDown(Keys.Right);
+        this.Left = Zero.Keyboard.KeyIsDown(Keys.A) || Zero.Keyboard.KeyIsDown(Keys.Left);
+        
+        if(this.Up)
+        {
+            this.Direction.Y +=7;
+        }
+        
+        else if(this.Down)
+        {
+            this.Direction.Y -=7;
+        } else
+        {
+            this.Direction.Y = 0;
+        }
+        if(this.Left)
+        {
+            this.Direction.X -=7;
+        }
+         else if(this.Right)
+        {
+            this.Direction.X +=7;
+        } else
+        {
+            this.Direction.X = 0;
+        }
+        
+        if(this.Direction.X <= -7)
+        {
+            this.Direction.X = -7;
+        }
+        
+        if(this.Direction.Y <= -7)
+        {
+            this.Direction.Y = -7;
+        }
+        
+        if(this.Direction.X >= 7)
+        {
+            this.Direction.X = 7;
+        }
+        
+        if(this.Direction.Y >= 7)
+        {
+            this.Direction.Y = 7;
+        }
+        this.Owner.RigidBody.Velocity = this.Direction;
+    }
+}

@@ -1,0 +1,64 @@
+class SCRPT_GameOver : ZilchComponent
+{
+    var No : Level = Level.Find("MainMenu");
+    var Yes : Level = Level.Find("Gameplay");
+    
+    var Controller : Gamepad = null;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var gamepad = Zero.Gamepads.GetGamePad(0);
+        
+        var gamepadLeft = this.Controller.IsButtonPressed(Buttons.DpadLeft);
+        var keyboardLeft = Zero.Keyboard.KeyIsPressed(Keys.A)|| Zero.Keyboard.KeyIsPressed(Keys.Left);
+        
+        var gamepadRight = this.Controller.IsButtonHeld(Buttons.DpadRight);
+        var keyboardRight = Zero.Keyboard.KeyIsPressed(Keys.D)|| Zero.Keyboard.KeyIsPressed(Keys.Right);
+        
+        var gamepadContinue = this.Controller.IsButtonPressed(Buttons.A);
+        var keyboardContinue = Zero.Keyboard.KeyIsPressed(Keys.Space) || Zero.Keyboard.KeyIsPressed(Keys.Enter);
+        
+        var yes = this.Space.FindObjectByName("BKG_Button_Yes");
+        var no = this.Space.FindObjectByName("BKG_Button_No");
+        
+        if(yes.Sprite.CurrentFrame == 1 && (gamepadLeft || keyboardLeft))
+        {
+            no.Sprite.CurrentFrame = 1;
+            yes.Sprite.CurrentFrame = 0;
+        }
+        
+        else if(yes.Sprite.CurrentFrame == 1 && (gamepadRight || keyboardRight))
+        {
+            no.Sprite.CurrentFrame = 1;
+            yes.Sprite.CurrentFrame = 0;
+        }
+        
+        else if(no.Sprite.CurrentFrame == 1 && (gamepadRight || keyboardRight))
+        {
+            yes.Sprite.CurrentFrame = 1;
+            no.Sprite.CurrentFrame = 0;
+        }
+        
+        else if(no.Sprite.CurrentFrame == 1 && (gamepadLeft || keyboardLeft))
+        {
+            yes.Sprite.CurrentFrame = 1;
+            no.Sprite.CurrentFrame = 0;
+        }
+        
+        if(yes.Sprite.CurrentFrame == 1 && (gamepadContinue || keyboardContinue))
+        {
+            this.Space.LoadLevel(this.Yes);
+        }
+        else if (no.Sprite.CurrentFrame == 1 && (gamepadContinue || keyboardContinue))
+        {
+            this.Space.LoadLevel(this.No);
+        }
+    }
+}

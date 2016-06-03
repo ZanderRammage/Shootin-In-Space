@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PlayerMovement",
+		uint64 ResourceId = 575a0c8211a2e7a9,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"PlayerScripts",
+		],
+	},
+},

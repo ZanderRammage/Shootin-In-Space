@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "EnemySpawn",
+		uint64 ResourceId = 565b1b134a4352ba,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"LevelSettings",
+		],
+	},
+},

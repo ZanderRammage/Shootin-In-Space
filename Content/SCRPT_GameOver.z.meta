@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "SCRPT_GameOver",
+		uint64 ResourceId = 5686be2f6edfacb2,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"MenuAndButtons",
+		],
+	},
+},

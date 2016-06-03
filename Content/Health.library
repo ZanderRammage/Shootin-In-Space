@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "Health",
+	uint64 LibraryId = 561927bfd9f924f0,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},

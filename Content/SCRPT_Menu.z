@@ -1,0 +1,79 @@
+class SCRPT_Menu : ZilchComponent
+{
+    var Controller : Gamepad = null;
+    
+    var Temp : Integer = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var gamepad = Zero.Gamepads.GetGamePad(0);
+        
+        var down = gamepad.IsButtonPressed(Buttons.DpadDown) || Zero.Keyboard.KeyIsPressed(Keys.S) || Zero.Keyboard.KeyIsPressed(Keys.Down);
+        var up = gamepad.IsButtonPressed(Buttons.DpadUp) || Zero.Keyboard.KeyIsPressed(Keys.W) || Zero.Keyboard.KeyIsPressed(Keys.Up);
+        var accept = gamepad.IsButtonPressed(Buttons.A) || Zero.Keyboard.KeyIsPressed(Keys.Space) || Zero.Keyboard.KeyIsPressed(Keys.Enter);
+        
+        var start = this.Space.FindObjectByName("BG_Button_Start");
+        var instructions = this.Space.FindObjectByName("BG_Button_Instructions");
+        var quit = this.Space.FindObjectByName("BG_Button_Quit");
+        
+        if(down)
+        {
+            this.Temp += 1;
+        }
+        else if(up)
+        {
+            this.Temp -= 1;
+        }
+        
+        if(this.Temp >= 3)
+        {
+            this.Temp = 0;
+        }
+        
+        if(this.Temp <= -1)
+        {
+            this.Temp = 2;
+        }
+        
+        if(this.Temp == 0)
+        {
+            start.Sprite.CurrentFrame = 1;
+            instructions.Sprite.CurrentFrame = 0;
+            quit.Sprite.CurrentFrame = 0;
+        }
+        
+        else if(this.Temp == 1)
+        {
+            start.Sprite.CurrentFrame = 0;
+            instructions.Sprite.CurrentFrame = 1;
+            quit.Sprite.CurrentFrame = 0;
+        }
+        
+        else if(this.Temp == 2)
+        {
+            start.Sprite.CurrentFrame = 0;
+            instructions.Sprite.CurrentFrame = 0;
+            quit.Sprite.CurrentFrame = 1;
+        }
+        
+        if(this.Temp == 0 && accept)
+        {
+            this.Space.LoadLevel(Level.Find("Gameplay"));
+        }
+        if(this.Temp == 1 && accept)
+        {
+            this.Space.LoadLevel(Level.Find("Instructions"));
+        }
+        if(this.Temp == 2 && accept)
+        {
+            this.GameSession.Quit();
+        }
+    }
+}

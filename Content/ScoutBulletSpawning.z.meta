@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ScoutBulletSpawning",
+		uint64 ResourceId = 575a1839ca5c155d,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"ScoutScripts",
+		],
+	},
+},

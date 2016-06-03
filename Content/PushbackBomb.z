@@ -1,0 +1,22 @@
+class PushbackBomb : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(Zero.Keyboard.KeyIsPressed(Keys.Q))
+        {
+            var position = this.Owner.Transform.Translation;
+            var velocity = this.Owner.RigidBody.Velocity;
+            
+            var spawnPosition = this.Owner.Transform.Translation;
+            var archetypeToSpawn = Archetype.Find("PushbackWave");
+            var createdBullet = this.Space.CreateAtPosition(archetypeToSpawn, spawnPosition);
+            createdBullet.RigidBody.Velocity = Real3(10,0,0);
+        }
+    }
+}

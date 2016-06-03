@@ -1,0 +1,85 @@
+class PlayerShooting : ZilchComponent
+{
+    [Property]
+    var ShotCount : Real = 3;
+    
+    var Blaster : Boolean = true;
+    var Assault : Boolean = false;
+    
+    var Timer : Real = 0;
+    var Delay : Real = 0.1;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Timer += event.Dt;
+        this.Delay += event.Dt;
+        
+        var spawnPosition = this.Owner.Transform.Translation;
+        var bullet = Archetype.Find("Bullet");
+        var hBullet = Archetype.Find("HeavyBullet");
+        
+        if(this.Assault == false && Zero.Keyboard.KeyIsPressed(Keys.Tab) || Zero.Keyboard.KeyIsPressed(Keys.Z))
+        {
+            this.Assault = true;
+            this.Blaster = false;
+            Console.WriteLine("Blaster Activated");
+        }
+        else if(this.Assault == true && Zero.Keyboard.KeyIsPressed(Keys.Tab) || Zero.Keyboard.KeyIsPressed(Keys.Z))
+        {
+            this.Blaster = true;
+            this.Assault = false;
+            Console.WriteLine("Assault Activated");
+        }
+        
+        if(this.Assault == true)
+        {
+            var animationSpeed = 0;
+            
+            if(Zero.Keyboard.KeyIsDown(Keys.Space))
+            {
+                animationSpeed = 1;
+                
+                if(this.Timer >= 0.1)
+                {
+                    var createdBullet = this.Space.CreateAtPosition(bullet, spawnPosition);
+                    createdBullet.RigidBody.Velocity = Real3(30,0,0);
+                    this.Timer = 0;
+                }
+            }
+            else
+            {
+                animationSpeed = 0;
+            }
+            this.Space.FindObjectByName("ShipGuns").Sprite.AnimationSpeed = animationSpeed;
+        }
+        
+        if(this.Blaster == true)
+        {
+            if(Zero.Keyboard.KeyIsDown(Keys.Space))
+            {
+                if(this.ShotCount < 3 && this.Delay >=0.1)
+                {
+                    var createdBullet = this.Space.CreateAtPosition(hBullet, spawnPosition);
+                    createdBullet.RigidBody.Velocity = Real3(30,0,0);
+                    this.Delay = 0;
+                    this.ShotCount += 1;
+                }
+                else
+                {
+                    this.Space.FindObjectByName("ShipGuns").Sprite.AnimationSpeed = 0;
+                }
+                
+                if(this.ShotCount == 3)
+                {
+                    this.ShotCount = 0;
+                    this.Delay = -1;
+                }
+            }
+        }
+    }
+}

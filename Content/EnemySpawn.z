@@ -1,0 +1,65 @@
+class EnemySpawn : ZilchComponent
+{
+    var RandomGenerator : Random = Random();
+    
+    var SpawnTimer : Real = 0;
+    
+    var Ypos : Real = 0;
+    
+    var EnemyCount : Integer = 0;
+    
+    var Random : Random = Random();
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Ypos = this.RandomGenerator.Range(-10, 10);
+        Console.WriteLine(this.EnemyCount);
+        this.SpawnTimer += event.Dt;
+        
+        if(this.SpawnTimer >= 0 && this.EnemyCount < 20)
+        {
+            var random = this.Random.DieRoll(10);
+            var spawnPosition = Real3(18, 0, 0);
+            spawnPosition.Y = this.Ypos;
+            if(random >= 3)
+            {
+                var archetypeToSpawn = Archetype.Find("Scout");
+                var createdEnemy = this.Space.CreateAtPosition(archetypeToSpawn, spawnPosition);
+                createdEnemy.RigidBody.Velocity = Real3(-5,0,0);
+                this.SpawnTimer = 0;
+                this.EnemyCount += 1;
+            }
+            if(random < 3 && this.EnemyCount != 4 && this.EnemyCount != 9 && this.EnemyCount != 14 && this.EnemyCount != 19)
+            {
+                var archetypeToSpawn = Archetype.Find("Tank");
+                var createdEnemy = this.Space.CreateAtPosition(archetypeToSpawn, spawnPosition);
+                createdEnemy.RigidBody.Velocity = Real3(-2,0,0);
+                this.SpawnTimer = 0;
+                this.EnemyCount += 2;
+            }
+        }
+        
+        if(this.EnemyCount == 5 && this.SpawnTimer == 0)
+        {
+            this.SpawnTimer = -7;
+        }
+        if(this.EnemyCount == 10 && this.SpawnTimer == 0)
+        {
+            this.SpawnTimer = -7;
+        }
+        if(this.EnemyCount == 15 && this.SpawnTimer == 0)
+        {
+            this.SpawnTimer = -7;
+        }
+        if(this.EnemyCount == 20 && this.SpawnTimer == 0)
+        {
+            this.SpawnTimer = -7;
+        }
+    }
+}

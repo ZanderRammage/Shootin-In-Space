@@ -1,0 +1,33 @@
+class PlayerAnimation : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var up = Zero.Keyboard.KeyIsDown(Keys.W) || Zero.Keyboard.KeyIsDown(Keys.Up);
+        var down = Zero.Keyboard.KeyIsDown(Keys.S) || Zero.Keyboard.KeyIsDown(Keys.Down);
+        var right = Zero.Keyboard.KeyIsDown(Keys.D) || Zero.Keyboard.KeyIsDown(Keys.Right);
+        var thruster = this.Space.FindObjectByName("Thruster").Sprite.CurrentFrame;
+        if(up || up && right || right || down && right || down)
+        {
+            if(this.Space.FindObjectByName("Thruster").Sprite.CurrentFrame == 9)
+            {
+                this.Space.FindObjectByName("Thruster").Sprite.CurrentFrame = 4;
+            }
+        }
+        
+        else
+        {
+            this.Space.FindObjectByName("Thruster").Sprite.CurrentFrame = 0;
+            
+            if(this.Space.FindObjectByName("Thruster").Sprite.CurrentFrame == 2)
+            {
+                this.Space.FindObjectByName("Thruster").Sprite.CurrentFrame = 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "The Game With No Name",
+	uint64 LibraryId = 56fd77813f584dc6,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},

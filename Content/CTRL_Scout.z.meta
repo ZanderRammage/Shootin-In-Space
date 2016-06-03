@@ -1,0 +1,14 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "CTRL_Scout",
+		uint64 ResourceId = 5659c3b593eb65d9,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+		],
+	},
+},

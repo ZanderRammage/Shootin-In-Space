@@ -1,0 +1,8 @@
+FontContent = 
+{
+	FontBuilder = 
+	{
+		string Name = "Roboto-CondensedItalic",
+		uint64 ResourceId = 5636b0511817b19f,
+	},
+},

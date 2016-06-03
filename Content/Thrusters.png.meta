@@ -1,0 +1,20 @@
+ImageContent = 
+{
+	SpriteSourceBuilder = 
+	{
+		string Name = "Thrusters",
+		uint64 ResourceId = 565c71d726d596cf,
+		uint64 AtlasId = 5274cf95e4a661fd,
+		uint FrameSizeX = 33,
+		uint FrameSizeY = 25,
+		uint FrameCount = 10,
+		float FrameDelay = 0.0833333358,
+		float OriginX = 16,
+		float OriginY = 12,
+		float PixelsPerUnit = 33,
+		bool Smoothing = false,
+		bool Looping = true,
+		Vec4 Slices = [0, 0, 0, 0],
+		SpriteFill Fill = Stretch,
+	},
+},

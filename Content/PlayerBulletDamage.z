@@ -1,0 +1,30 @@
+class PlayerBulletDamage : ZilchComponent
+{
+    var EnemyHealth : Integer;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+    
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        if(event.OtherObject.Name == "Scout")
+        {
+            this.EnemyHealth = event.OtherObject.ScoutHealth.Health;
+            this.EnemyHealth -= 1;
+            event.OtherObject.ScoutHealth.Health = this.EnemyHealth;
+            this.Owner.Destroy();
+            Console.WriteLine("Hi");
+        }
+        
+        
+        if(event.OtherObject.Name == "ScoutBullet")
+        {
+            this.Owner.Destroy();
+            Console.WriteLine("Hey There!");
+        }
+    }
+}

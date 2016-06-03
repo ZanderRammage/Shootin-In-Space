@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "Shootin' In Space",
+	uint64 LibraryId = 56883a0327592f18,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},

@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PlayerBulletDamage",
+		uint64 ResourceId = 5758db44415fe9f4,
+	},
+},

@@ -1,0 +1,32 @@
+class PushbackWallDestroy : ZilchComponent
+{
+    var Timer : Real = 0;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Timer += event.Dt;
+        
+        if(this.Timer >= 03)
+        {
+            this.Owner.Destroy();
+            this.Timer = 0;
+        }
+    }
+    
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        if(event.OtherObject.Name == "ScoutBullet")
+        {
+            event.OtherObject.Destroy();
+        }
+    }
+}

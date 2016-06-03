@@ -1,0 +1,8 @@
+FontContent = 
+{
+	FontBuilder = 
+	{
+		string Name = "thin_pixel-7",
+		uint64 ResourceId = 568ee2d5b6f9f398,
+	},
+},

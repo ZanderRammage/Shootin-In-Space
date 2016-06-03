@@ -1,0 +1,8 @@
+FontContent = 
+{
+	FontBuilder = 
+	{
+		string Name = "PressStart2P",
+		uint64 ResourceId = 568ee2d5b6f0e9b8,
+	},
+},

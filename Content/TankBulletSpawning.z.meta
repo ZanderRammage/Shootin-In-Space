@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "TankBulletSpawning",
+		uint64 ResourceId = 57463615a8731c21,
+	},
+},

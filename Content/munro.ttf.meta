@@ -1,0 +1,8 @@
+FontContent = 
+{
+	FontBuilder = 
+	{
+		string Name = "munro",
+		uint64 ResourceId = 568ee2d5b6993b6c,
+	},
+},

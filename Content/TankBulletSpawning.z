@@ -1,0 +1,32 @@
+class TankBulletSpawning : ZilchComponent
+{
+    var Delay : Real = 0;
+    
+    var RandomGenerator : Random = Random();
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Delay += event.Dt;
+        
+        var position = this.Owner.Transform.Translation;
+        var velocity = this.Owner.RigidBody.Velocity;
+        
+        var delay = this.RandomGenerator.Range(2, 5);
+        
+        if(this.Delay > delay)
+        {
+            var spawnPosition = this.Owner.Transform.Translation;
+            var archetypeToSpawn = Archetype.Find("TankBullet");
+            var createdBullet = this.Space.CreateAtPosition(archetypeToSpawn, spawnPosition);
+            createdBullet.RigidBody.Velocity = Real3(-7,0,0);
+            this.Delay = 0;
+        }
+    }
+}

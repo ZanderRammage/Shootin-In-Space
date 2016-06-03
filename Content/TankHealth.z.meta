@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "TankHealth",
+		uint64 ResourceId = 574637cc6816933b,
+	},
+},

@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "SCRPT_Instructions",
+		uint64 ResourceId = 5687f38e20b3774a,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"MenuAndButtons",
+		],
+	},
+},

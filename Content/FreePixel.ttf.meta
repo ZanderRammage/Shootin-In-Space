@@ -1,0 +1,8 @@
+FontContent = 
+{
+	FontBuilder = 
+	{
+		string Name = "FreePixel",
+		uint64 ResourceId = 568ee2d5b691985e,
+	},
+},

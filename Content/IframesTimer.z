@@ -1,0 +1,21 @@
+class IframesTimer : ZilchComponent
+{
+    var Check : Real = 1;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Check += event.Dt;
+        
+        if(this.Check >= 1)
+        {
+            var temp = this.Space.FindObjectByName("Player").PlayerHealth.IFrames;
+            
+            this.Owner.SpriteText.Text = "I-Frames `temp`";
+            this.Check = 0;
+        }
+    }
+}

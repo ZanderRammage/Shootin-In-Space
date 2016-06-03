@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PushbackWallDestroy",
+		uint64 ResourceId = 57476081707f1fec,
+	},
+},

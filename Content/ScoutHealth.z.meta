@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ScoutHealth",
+		uint64 ResourceId = 575a1a7e6c208830,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"ScoutScripts",
+		],
+	},
+},

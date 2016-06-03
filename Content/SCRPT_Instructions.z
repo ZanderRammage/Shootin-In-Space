@@ -1,0 +1,23 @@
+class SCRPT_Instructions : ZilchComponent
+{
+    var Menu : Level = Level.Find("MainMenu");
+    var Controller : Gamepad = null;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var gamepad = Zero.Gamepads.GetGamePad(0);
+        
+        if(gamepad.IsButtonPressed(Buttons.A) || Zero.Keyboard.KeyIsPressed(Keys.Space) || Zero.Keyboard.KeyIsPressed(Keys.Enter))
+        {
+            this.Space.LoadLevel(this.Menu);
+        }
+    }
+}

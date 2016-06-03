@@ -1,0 +1,22 @@
+class PlayerHealth : ZilchComponent
+{
+    [Property]
+    var Health : Integer = 12;
+    var IFrames : Real = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.IFrames += event.Dt;
+        
+        if(this.Health <= 0)
+        {
+            this.Space.LoadLevel(Level.Find("GameOver"));
+        }
+    }
+}

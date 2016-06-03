@@ -1,0 +1,82 @@
+class ScoutMovement : ZilchComponent
+{
+    var Wait : Real = 1;
+    var RandomGenerator : Random = Random();
+    var RandomMovementActive : Boolean;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        var upOrDown = this.RandomGenerator.Range(-5, 5);
+        var movementSpeed = -5;
+        this.Owner.RigidBody.Velocity = Real3(movementSpeed, upOrDown, 0);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var speed = this.Owner.RigidBody.Velocity.X;
+        this.RandomMovementActive = this.Owner.PushbackScript.RandomMovementActive;
+        
+         this.Wait += event.Dt;
+        if(this.RandomMovementActive == true)
+        {
+            if(this.Wait >= 0.5 && this.Owner.Transform.Translation.Y >=5)
+            {
+                var down = this.RandomGenerator.Range(-5, 0);
+                
+                if(this.Owner.RigidBody.Velocity.Y > 0)
+                {
+                    speed = -5 + this.Owner.RigidBody.Velocity.Y;
+                }
+                else if(this.Owner.RigidBody.Velocity.Y < 0)
+                {
+                    speed = -5 - this.Owner.RigidBody.Velocity.Y;
+                }
+                else
+                {
+                    speed = -5;
+                }
+                this.Owner.RigidBody.Velocity = Real3(speed, down, 0);
+                this.Wait = 0;
+            }
+            else if(this.Wait >=0.5 && this.Owner.Transform.Translation.Y <= -5)
+            {
+                var down = this.RandomGenerator.Range(0, 5);
+                
+                if(this.Owner.RigidBody.Velocity.Y >= 0)
+                {
+                    speed = -5 + this.Owner.RigidBody.Velocity.Y;
+                }
+                else if(this.Owner.RigidBody.Velocity.Y <= 0)
+                {
+                    speed = -5 - this.Owner.RigidBody.Velocity.Y;
+                }
+                else
+                {
+                    speed = -5;
+                }
+                this.Owner.RigidBody.Velocity = Real3(speed, down, 0);
+                this.Wait = 0;
+            }
+            else if(this.Wait >= 0.5 && this.Owner.Transform.Translation.Y > -5 && this.Owner.Transform.Translation.Y < 5)
+            {
+                var down = this.RandomGenerator.Range(-5, 5);
+                
+                if(this.Owner.RigidBody.Velocity.Y >= 0)
+                {
+                    speed = -5 + this.Owner.RigidBody.Velocity.Y;
+                }
+                else if(this.Owner.RigidBody.Velocity.Y <= 0)
+                {
+                    speed = -5 - this.Owner.RigidBody.Velocity.Y;
+                }
+                else
+                {
+                    speed = -5;
+                }
+                this.Owner.RigidBody.Velocity = Real3(speed, down, 0);
+                this.Wait = 0;
+            }
+        }
+    }
+}

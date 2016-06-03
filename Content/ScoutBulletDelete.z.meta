@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ScoutBulletDelete",
+		uint64 ResourceId = 57463ddd27728991,
+	},
+},

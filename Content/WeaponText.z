@@ -1,0 +1,27 @@
+class WeaponText : ZilchComponent
+{
+    var Controller : Gamepad = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var gamepad = Zero.Gamepads.GetGamePad(0);
+        
+        if(this.Controller.IsButtonPressed(Buttons.Y))
+        {
+            if(this.Owner.SpriteText.Text == "Assault Armed")
+            {
+                this.Owner.SpriteText.Text = "Blaster Armed";
+            }
+            else if(this.Owner.SpriteText.Text == "Blaster Armed")
+            {
+                this.Owner.SpriteText.Text = "Assault Armed";
+            }
+        }
+    }
+}

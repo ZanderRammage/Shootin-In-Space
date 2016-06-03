@@ -1,0 +1,8 @@
+FontContent = 
+{
+	FontBuilder = 
+	{
+		string Name = "Roboto-Regular",
+		uint64 ResourceId = 5636b0511fe9b5b7,
+	},
+},

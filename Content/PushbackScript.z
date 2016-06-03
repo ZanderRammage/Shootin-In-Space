@@ -1,0 +1,41 @@
+class PushbackScript : ZilchComponent
+{
+    var RandomMovementActive : Boolean = true;
+    var Timer : Real = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.RandomMovementActive == false)
+        {
+            this.Timer += event.Dt;
+            Console.WriteLine("`this.RandomMovementActive` `this.Timer`");
+        }
+        
+        if(this.Timer >= 3)
+        {
+            this.RandomMovementActive = true;
+            Console.WriteLine("hey");
+            this.Timer = 0;
+        }
+    }
+    
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        if(event.OtherObject.Name == "PushbackWave")
+        {
+            this.RandomMovementActive = false;
+            
+            var velocity = this.Owner.RigidBody.Velocity;
+            velocity = Real3(10, 0, 0);
+            this.Owner.RigidBody.Velocity = velocity;
+        }
+    }
+}

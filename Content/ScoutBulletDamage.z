@@ -1,0 +1,25 @@
+class ScoutBulletDamage : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+    
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var player = this.Space.FindObjectByName("Player");
+        
+        if(event.OtherObject.Name == "Player" && player.PlayerHealth.IFrames >=1)
+        {
+            var health = this.Space.FindObjectByName("Player").PlayerHealth.Health;
+            var iframes = this.Space.FindObjectByName("Player").PlayerHealth.IFrames;
+            
+            health -= 1;
+            iframes = 0;
+            
+            this.Space.FindObjectByName("Player").PlayerHealth.Health = health;
+            this.Space.FindObjectByName("Player").PlayerHealth.IFrames = iframes;
+        }
+    }
+}
